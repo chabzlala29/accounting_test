@@ -1,0 +1,15 @@
+= form_for @transaction, class: 'form-horizontal' do |f|
+  .form-group
+    = f.label 'Comment'
+    = f.text_field :comment, class: 'form-control', placeholder: 'Enter account name'
+  = f.fields_for :postings do |a|
+    .form-group
+      = a.select :account_id, Account.all.map{|account| ["#{account.name} <##{account.id}>", account.id] }
+      = a.number_field :amount
+  .form-group
+    %h4 Enter number of postings for transaction (optional)
+    = form_tag new_transaction_path, method: :get do
+      = number_field_tag :postings_count
+      = submit_tag 'Add postings', class: 'btn btn-warning'
+  = f.submit 'Submit', class: 'btn btn-default'
+

@@ -1,0 +1,8 @@
+%nav
+  %ul.nav.masthead-nav
+    %li{ class: is_active_path(accounts_path) }
+      = link_to 'Accounts', accounts_path
+    %li{ class: is_active_path }
+      %a{:href => "#"} Features
+    %li{ class: is_active_path }
+      %a{:href => "#"} Contact

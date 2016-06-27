@@ -1,0 +1,17 @@
+- if @postings.any?
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th Posting ID
+        %th Account ID
+        %th Transaction ID
+        %th Amount
+    %tbody
+      - @postings.each do |posting|
+        %tr
+          %th{:scope => "row"}= posting.id
+          %td= posting.account_id
+          %td= posting.transaction_id
+          %td= posting.amount
+- else
+  %h3 No Postings available

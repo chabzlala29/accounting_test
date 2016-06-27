@@ -1,0 +1,24 @@
+- if @accounts.any?
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th Account ID
+        %th Name
+        %th Actions
+    %tbody
+      - @accounts.each do |account|
+        %tr
+          %th{:scope => "row"}= account.id
+          %td= account.name
+          %td
+            = link_to 'Delete Account', account, method: :delete
+            = '|'
+            = link_to 'Update Account', edit_account_path(account)
+            = '|'
+            = link_to 'View Postings', account_postings_path(account)
+            = '|'
+            = link_to 'Create Transaction', new_transaction_path
+
+  =link_to 'Create new account', new_account_path, class: 'btn btn-success btn-lg'
+- else
+  %h3 No Postings available

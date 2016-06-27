@@ -1,0 +1,5 @@
+= form_for @account, class: 'form-horizontal' do |f|
+  .form-group
+    = f.label 'Name'
+    = f.text_field :name, class: 'form-control', placeholder: 'Enter account name'
+  = f.submit 'Submit', class: 'btn btn-default'
