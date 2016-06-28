@@ -1,8 +1,17 @@
-%nav
-  %ul.nav.masthead-nav
-    %li{ class: is_active_path(accounts_path) }
-      = link_to 'Accounts', accounts_path
-    %li{ class: is_active_path }
-      %a{:href => "#"} Features
-    %li{ class: is_active_path }
-      %a{:href => "#"} Contact
+/ Fixed navbar
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      %button.navbar-toggle.collapsed{"aria-controls" => "navbar", "aria-expanded" => "false", "data-target" => "#navbar", "data-toggle" => "collapse", :type => "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to 'Accounting Application', root_path, class: 'navbar-brand'
+    #navbar.navbar-collapse.collapse.pull-right
+      %ul.nav.navbar-nav
+        %li{ class: is_active_path(root_path) }
+          = link_to 'Home', root_path
+        %li{ class: is_active_path(accounts_path) }
+          = link_to 'Accounts', accounts_path
+    / /.nav-collapse

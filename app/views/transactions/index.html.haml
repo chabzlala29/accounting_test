@@ -1,0 +1,18 @@
+- if @transactions.any?
+  %table.table.table-bordered
+    %thead
+      %tr
+        %th Transaction ID
+        %th Date
+        %th Comment
+        %th Actions
+    %tbody
+      - @transactions.each do |trans|
+        %tr
+          %th{:scope => "row"}= trans.id
+          %td= trans.updated_at
+          %td= trans.comment
+          %td
+            = link_to 'View Postings', transaction_postings_path(trans)
+- else
+  %h3 No Trnsaction available

@@ -6,15 +6,8 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    .site-wrapper
-      .site-wrapper-inner
-        .cover-container
-          .masthead.clearfix
-            .inner
-              %h3.masthead-brand 
-                = link_to 'Accounting App', root_path
-              = render 'layouts/nav'
-          - if flash.any?
-            = render 'layouts/flash_messages'
-          = yield
-          = render 'layouts/footer'
+    = render 'layouts/nav'
+    .container
+      = render 'layouts/flash_messages' if flash.any?
+      .content-wrapper
+        = yield

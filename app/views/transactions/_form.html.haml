@@ -1,0 +1,22 @@
+= form_for @transaction, class: 'form-horizontal' do |f|
+  .row.postings
+    = f.fields_for :postings do |p|
+      .col-md-4.posting-item{ data: { id: p.object.id } }
+        = link_to 'remove', postings_remove_postings_path(id: p.object.id), method: :delete, remote: true
+        = p.hidden_field :id, value: p.object.id
+        .form-group
+          = p.label 'Account'
+          = p.select :account_id, Account.all.map{ |a| [a.name, a.id] }, {}, { class: 'form-control' }
+        .form-group
+          = p.label 'Amount'
+          = p.number_field :amount, class: 'form-control'
+        .form-group
+          = p.label 'Type'
+          = p.select :status, Posting.statuses.keys, {}, { class: 'form-control' }
+    = link_to 'Add Posting', new_transaction_path, class: 'btn btn-success btn-lg', id: 'add-posting', remote: true
+  .row
+    .col-md-12
+    .form-group
+      = f.label 'Comment'
+      = f.text_area :comment, class: 'form-control', placeholder: 'Enter transaction comment'
+    = f.submit 'Submit', class: 'btn btn-default'
