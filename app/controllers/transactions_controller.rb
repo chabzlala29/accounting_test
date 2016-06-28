@@ -4,14 +4,14 @@ class TransactionsController < ApplicationController
   include RenderWithException
 
   def index
-    @transactions = Transaction.all
+    @transactions = Transaction.all.active
   end
 
   def new
     get_transaction_by_session
-
-    if request.xhr?
+    if params[:add] == 'true'
       create_posting
+      redirect_to new_transaction_path
     end
   end
 
@@ -20,11 +20,10 @@ class TransactionsController < ApplicationController
 
     render_with_exception(path: transactions_path) do
       if @transaction.update(transaction_params)
+        @transaction.active!
         reset_transaction_session
         redirect_to transactions_path, { notice: 'Created Successfully' }
       else
-        @transaction.destroy
-        reset_transaction_session
         redirect_to new_transaction_path, { notice: @transaction.errors['sum'].first }
       end
     end

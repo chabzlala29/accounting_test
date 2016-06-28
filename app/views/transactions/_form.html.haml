@@ -13,7 +13,7 @@
         .form-group
           = p.label 'Type'
           = p.select :status, Posting.statuses.keys, {}, { class: 'form-control' }
-    = link_to 'Add Posting', new_transaction_path, class: 'btn btn-success btn-lg', id: 'add-posting', remote: true
+    = link_to 'Add Posting', new_transaction_path(add: true), class: 'btn btn-success btn-lg', id: 'add-posting'
   .row
     .col-md-12
     .form-group

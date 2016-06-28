@@ -7,6 +7,8 @@ class Transaction < ActiveRecord::Base
     end
   end
 
+  enum status: [:active, :inactive]
+
   has_many :postings, dependent: :destroy
 
   accepts_nested_attributes_for :postings

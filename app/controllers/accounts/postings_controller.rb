@@ -3,6 +3,6 @@ class Accounts::PostingsController < ApplicationController
 
   def index
     @account = Account.find(params[:account_id])
-    @postings = @account.postings
+    @postings = @account.postings.active_transact
   end
 end
