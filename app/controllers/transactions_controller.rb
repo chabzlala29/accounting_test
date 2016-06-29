@@ -18,13 +18,15 @@ class TransactionsController < ApplicationController
   def update
     get_transaction_by_session
 
+    @transaction.assign_attributes(transaction_params)
+
     render_with_exception(path: transactions_path) do
-      if @transaction.update(transaction_params)
+      if @transaction.valid? && @transaction.sufficient_balance?
         @transaction.active!
         reset_transaction_session
         redirect_to transactions_path, { notice: 'Created Successfully' }
       else
-        redirect_to new_transaction_path, { notice: @transaction.errors['sum'].first }
+        redirect_to new_transaction_path, { notice: @transaction.errors.messages }
       end
     end
   end
@@ -36,7 +38,8 @@ class TransactionsController < ApplicationController
   end
 
   def create_posting
-    @transaction.postings.create
+    posting = @transaction.postings.new
+    posting.save(validate: false)
   end
 
   def reset_transaction_session
@@ -51,6 +54,9 @@ class TransactionsController < ApplicationController
                    end
 
     session[:transaction_id] = @transaction.id
+  rescue ActiveRecord::RecordNotFound
+    reset_transaction_session
+    @transaction = set_new_transaction
   end
 
   def set_new_transaction

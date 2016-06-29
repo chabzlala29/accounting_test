@@ -3,4 +3,9 @@
     %span{"aria-hidden" => "true"} &times;
   %strong Message!
   - flash.each do |key, value|
-    = content_tag :div, value, class: "flash #{key}"
+    - if value.is_a? Hash
+      - value.each do |k,v|
+        - errors = v.join(', ')
+        = content_tag :div, "#{k} #{errors}", class: "flash #{key}"
+    - else
+      = content_tag :div, value, class: "flash #{key}"

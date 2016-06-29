@@ -2,4 +2,7 @@
   .form-group
     = f.label 'Name'
     = f.text_field :name, class: 'form-control', placeholder: 'Enter account name'
+  .form-group
+    = f.label 'Current Balance'
+    = f.number_field :current_balance, class: 'form-control', placeholder: 'Enter Current Balance'
   = f.submit 'Submit', class: 'btn btn-default'

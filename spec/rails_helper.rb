@@ -30,8 +30,4 @@ RSpec.configure do |config|
     example.run
    end
   end
-
-  config.before(:suite) do
-    $site = FactoryGirl.create(:site)
-  end
 end

@@ -7,12 +7,14 @@
       %tr
         %th Account ID
         %th Name
+        %th Current Balance
         %th Actions
     %tbody
       - @accounts.each do |account|
         %tr
           %th{:scope => "row"}= account.id
           %td= account.name
+          %td= account.current_balance
           %td
             = link_to 'Delete Account', account, method: :delete
             = '|'
